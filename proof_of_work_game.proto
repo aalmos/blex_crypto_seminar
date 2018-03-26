@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+service ProofOfWorkGame {
+    rpc SolvePuzzles(stream Solution) returns (stream Puzzle) {}
+    rpc GetScoreBoard(google.protobuf.Empty) returns (ScoreBoard) {}
+}
+
+message Solution {
+    string player_name = 1;
+    bytes solution = 2;
+}
+
+message Puzzle {
+    bytes base = 1;
+    string hash_prefix = 2;
+}
+
+message Record {
+    string player_name = 1;
+    uint32 score = 2;
+}
+
+message ScoreBoard {
+    repeated Record records = 1;
+}
